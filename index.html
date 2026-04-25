@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0a0804" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <title>Link Tree</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,700&family=Inter:wght@200;300;400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <canvas id="treeCanvas"></canvas>
+    <div id="daySky"></div>
+    <div id="nightSky"></div>
+    <div id="grainOverlay" aria-hidden="true"></div>
+    <canvas id="transitionCanvas" aria-hidden="true"></canvas>
+    <div id="birdCursorRoot" aria-hidden="true">
+        <div class="bird-ghost bird-ghost--2"></div>
+        <div class="bird-ghost bird-ghost--1"></div>
+        <div id="birdCursor" class="bird-main">
+            <svg class="bird-svg" viewBox="0 0 96 56" width="88" height="52" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <linearGradient id="birdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#2a2520" />
+                        <stop offset="55%" stop-color="#4a4238" />
+                        <stop offset="100%" stop-color="#1a1814" />
+                    </linearGradient>
+                </defs>
+                <g class="bird-wings" stroke-linecap="round" stroke-linejoin="round">
+                    <path class="bird-wing bird-wing--l" fill="url(#birdGrad)" stroke="rgba(212,168,106,0.35)"
+                        stroke-width="0.6" d="M46 30 Q18 28 6 38 Q22 32 44 34 Z" transform-origin="52px 32px" />
+                    <path class="bird-wing bird-wing--r" fill="url(#birdGrad)" stroke="rgba(212,168,106,0.28)"
+                        stroke-width="0.6" d="M50 30 Q78 26 90 34 Q74 30 52 33 Z" transform-origin="48px 32px" />
+                </g>
+                <ellipse cx="50" cy="31" rx="14" ry="9" fill="url(#birdGrad)" stroke="rgba(212,168,106,0.25)"
+                    stroke-width="0.5" />
+                <circle cx="62" cy="27" r="3.2" fill="#1a1814" />
+                <path d="M68 26 L76 24 L70 29 Z" fill="#2a2218" />
+            </svg>
+        </div>
+    </div>
+
+    <div id="overlay">
+        <div id="mindmap" aria-hidden="false">
+            <svg id="mindmapSvg" class="mindmap-svg" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                <defs>
+                    <linearGradient id="mindmapLineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="rgba(212,168,106,0.55)" />
+                        <stop offset="100%" stop-color="rgba(212,168,106,0.12)" />
+                    </linearGradient>
+                </defs>
+                <g id="mindmapEdges" stroke="url(#mindmapLineGrad)" stroke-width="1.25" fill="none"
+                    stroke-linecap="round"></g>
+            </svg>
+            <div id="mindmapHub">
+                <header id="profile">
+                    <p id="tag">Est. 2026</p>
+                    <h1 id="username">SIDDHANT .S</h1>
+                    <div class="ornament">&#10022; &nbsp; &#10022; &nbsp; &#10022;</div>
+                    <p id="bio">Rooted in nature, reaching beyond the sky</p>
+                </header>
+            </div>
+            <nav id="links" aria-label="Social links">
+                <a href="mailto:siddhantshintre2006@gmail.com" class="link-item" id="link1" data-mind-index="0" target="_blank"
+                    rel="noopener noreferrer">
+                    <span class="link-float">
+                        <span class="link-num">01</span>
+                        <span class="link-label">Mail:<br> siddhantshintre2006@gmail.com</span>
+                        <span class="link-arr">&#8599;</span>
+                    </span>
+                </a>
+                <a href="https://github.com/shinsiddo" class="link-item" id="link2" data-mind-index="1" target="_blank"
+                    rel="noopener noreferrer">
+                    <span class="link-float">
+                        <span class="link-num">02</span>
+                        <span class="link-label">Github:<br> shinsiddo</span>
+                        <span class="link-arr">&#8599;</span>
+                    </span>
+                </a>
+                <a href="https://x.com/Xyzthebee" class="link-item" id="link3" data-mind-index="2" target="_blank"
+                    rel="noopener noreferrer">
+                    <span class="link-float">
+                        <span class="link-num">03</span>
+                        <span class="link-label">Twitter / X:<br> Xyzthebee</span>
+                        <span class="link-arr">&#8599;</span>
+                    </span>
+                </a>
+                <a href="https://www.linkedin.com/in/siddhant-shintre-078163405/" class="link-item" id="link4"
+                    data-mind-index="3" target="_blank" rel="noopener noreferrer">
+                    <span class="link-float">
+                        <span class="link-num">04</span>
+                        <span class="link-label">LinkedIn:<br> Siddhant Shintre</span>
+                        <span class="link-arr">&#8599;</span>
+                    </span>
+                </a>
+                <a href="https://t.me/SiddhantShintre" class="link-item" id="link5" data-mind-index="4" target="_blank"
+                    rel="noopener noreferrer">
+                    <span class="link-float">
+                        <span class="link-num">05</span>
+                        <span class="link-label">Telegram:<br> SiddhantShintre</span>
+                        <span class="link-arr">&#8599;</span>
+                    </span>
+                </a>
+            </nav>
+        </div>
+    </div>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
